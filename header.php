@@ -80,41 +80,22 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-toggle" aria-controls="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
             </button>
-            <div class="collapse navbar-collapse justify-content-center" id="nav-toggle">
-                <!-- <ul class="navbar-nav mx-auto justify-content-center mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link mx-3" aria-current="page" href="#">Finance</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link mx-3" href="#">Quizzes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link mx-3" href="#">Surveys</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link mx-3" href="#">Galleries</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link mx-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Category
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Trending News</a></li>
-                            <li><a class="dropdown-item" href="#">Top of the week</a></li>
-                            <li><a class="dropdown-item" href="#">Post Galleries</a></li>
-                            <li><a class="dropdown-item" href="#">Featured Quizzer</a></li>
-                            <li><a class="dropdown-item" href="#">Latest Surveys</a></li>
-                        </ul>
-                    </li>
-                </ul> -->
-                <?php
-                wp_nav_menu(
+            <div class="collapse navbar-collapse" id="nav-toggle">
+
+
+                <?php wp_nav_menu(
                     array(
-                        "theme_location" => "main-menu",
-                        "menu_class" => "navbar-nav mx-auto mb-2 mb-lg-0"
+                        'theme_location' => 'main-menu',
+                        'container' => 'div',
+                        'container_class' => 'collapse navbar-collapse',
+                        'menu_class' => 'navbar-nav m-auto mb-2 mb-lg-0',
+                        'depth' => '3',
+                        'fallback_cb' => 'WP_Bootstrap_Navwalker::fallback',
+                        'walker' => new WP_Bootstrap_Navwalker(),
                     )
-                )
+                );
                 ?>
+
                 <ul class="social-network list-unstyled d-flex align-items-center justify-content-lg-center mb-0">
                     <li><a href="#"><i class="fas fa-search"></i></a></li>
                     <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>

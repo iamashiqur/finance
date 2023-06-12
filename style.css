@@ -305,19 +305,26 @@ span.select2-selection.select2-selection--single {
     margin-right: 5px
 }
 
-.navbar .menu-main-menu-container .navbar-nav .nav-link {
+.navbar .navbar-nav a {
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
+    text-decoration: none;
     color: var(--clr-gray);
     font-weight: 600;
-    font-size: 15px
+    font-size: 15px;
+    margin: 0 10px;
 }
 
-.navbar .menu-main-menu-container .navbar-nav .nav-link:hover {
+.navbar #menu-item-142 .dropdown-menu .menu-item .dropdown-item {
+    margin: 0 !important;
+    font-weight: 500;
+}
+
+.navbar .navbar-nav a:hover {
     color: var(--clr-yellow)
 }
 
-.navbar .menu-main-menu-container .navbar-nav .dropdown-toggle {
+.navbar .navbar-nav .dropdown-toggle {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
@@ -326,13 +333,17 @@ span.select2-selection.select2-selection--single {
     align-items: center
 }
 
-.navbar .menu-main-menu-container .navbar-nav .dropdown-toggle::after {
+.navbar .navbar-nav .dropdown-toggle::after {
     border: 0;
     font-family: 'Nioicon' !important;
     content: '\ea23';
     line-height: 0;
     font-size: 12px;
     margin-left: 8px
+}
+
+.navbar .dropdown-menu .menu-item {
+    margin-left: 0px;
 }
 
 #carousel .owl-nav>button {

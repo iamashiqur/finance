@@ -1,7 +1,6 @@
 /**
  * @Script js for (Template/Project Name)
- *
- * @project     - Project Name
+ * @project     - Finance
  * @author      -
  * @created_by  -
  * @created_at  -
@@ -11,7 +10,7 @@
 /**
  * ========================================================
  * this function execute when DOM element ready
- * ===========================================================
+ * ========================================================
  */
 
 (function ($) {
@@ -29,38 +28,58 @@
     });
   });
 
-  // bitCoinCarouselInitial
-  if ($(".banner-carousel").length) {
-    $(".banner-carousel").owlCarousel({
-      items: 1,
-      loop: true,
-      margin: 0,
-      animateOut: "fadeOut",
-      nav: $(window).width() > 1300 ? true : false,
-      dots: false,
-      autoplay: true,
-      autoplayTimeout: 3000,
-      autoplayHoverPause: true,
-      navText: [
-        "<span class='ni ni-chevron-left'></span>",
-        "<span class='ni ni-chevron-right'></span>",
-      ],
+  // for dropdown
+  $(function () {
+    var dropdownMenu = $(".dropdown-menu");
+    // Show/hide the dropdown menu
+    $(".dropdown-toggle").on("click", function () {
+      dropdownMenu.toggleClass("show");
     });
-  }
+    // Hide the dropdown menu when clicked outside
+    $(document).on("click", function (event) {
+      var target = $(event.target);
+      if (!target.closest(".dropdown").length) {
+        dropdownMenu.removeClass("show");
+      }
+    });
+  });
+
+  // bitCoinCarouselInitial
+  $(function () {
+    if ($(".banner-carousel").length) {
+      $(".banner-carousel").owlCarousel({
+        items: 1,
+        loop: true,
+        margin: 0,
+        animateOut: "fadeOut",
+        nav: $(window).width() > 1300 ? true : false,
+        dots: false,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        navText: [
+          "<span class='ni ni-chevron-left'></span>",
+          "<span class='ni ni-chevron-right'></span>",
+        ],
+      });
+    }
+  });
 
   // featured-news-widget-slider
-  if ($(".featured-news-widget-slider").length) {
-    $(".featured-news-widget-slider").owlCarousel({
-      items: 1,
-      loop: true,
-      margin: 0,
-      animateOut: "fadeOut",
-      dots: true,
-      autoplay: true,
-      autoplayTimeout: 3000,
-      autoplayHoverPause: true,
-    });
-  }
+  $(function () {
+    if ($(".featured-news-widget-slider").length) {
+      $(".featured-news-widget-slider").owlCarousel({
+        items: 1,
+        loop: true,
+        margin: 0,
+        animateOut: "fadeOut",
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+      });
+    }
+  });
 
   // for select#select-country
   $(function () {
