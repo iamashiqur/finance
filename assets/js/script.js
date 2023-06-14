@@ -28,7 +28,7 @@
     });
   });
 
-  // for dropdown
+  // for nav dropdown
   $(function () {
     var dropdownMenu = $(".dropdown-menu");
     // Show/hide the dropdown menu

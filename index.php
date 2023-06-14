@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Main Index File
  * @Finance
@@ -10,53 +11,81 @@
 <!-- carousel -->
 <div id="carousel">
     <div class="banner-carousel owl-carousel">
-        <div class="carousel-item-card">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/slide-3.jpg" class="carousel-img d-block w-100" alt="slide-img" />
-            <div class="carousel-item-inner text-center text-white">
-                <div class="carousel-item-content">
-                    <p class="carousel-sub-title text-uppercase mb-0">Wealth Management</p>
-                    <h3 class="carousel-title my-3">Hedge funds bitching about Reddit can cry a river</h3>
-                    <div class="who-write-article d-flex align-items-center justify-content-center">
-                        <div class="user d-flex align-items-center  mx-3">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/user-1.png" alt="img" class="img-fluid user-img me-2">
-                            <p class="mb-0 user-name text-nowrap">Esther Howard</p>
+        <?php
+        $args = array(
+            'post_type' => 'sliders',
+            'post_per_page' => 3,
+        );
+        $query = new WP_Query($args);
+        while ($query->have_posts()) {
+            $query->the_post();
+            $user_name = get_post_meta(get_the_ID(), 'user_name', true);
+            $custom_date = get_post_meta(get_the_ID(), 'custom_date', true);
+            $more_details_link = get_post_meta(get_the_ID(), 'more_details_link', true);
+            $more_details = get_post_meta(get_the_ID(), 'more_details', true);
+        ?>
+            <div class="carousel-item-card">
+                <img src="<?php the_post_thumbnail_url(); ?>" class="carousel-img d-block w-100" alt="slide-img" />
+                <div class="carousel-item-inner text-center text-white">
+                    <div class="carousel-item-content">
+                        <p class="carousel-sub-title text-uppercase mb-0">
+                            <?php the_title() ?>
+                        </p>
+                        <h3 class="carousel-title my-3">
+                            <?php the_content() ?>
+                        </h3>
+                        <div class="who-write-article d-flex align-items-center justify-content-center">
+                            <?php
+                            if ($user_name) {
+                            ?>
+                                <div class="user d-flex align-items-center  mx-3">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/user-1.png" alt="img" class="img-fluid user-img me-2">
+                                    <p class="mb-0 user-name text-nowrap">
+                                        <?php echo $user_name ?>
+                                    </p>
+                                </div>
+                            <?php
+                            }
+                            ?>
+
+                            <?php
+                            if ($custom_date) {
+                            ?>
+                                <div class="post-date d-flex align-items-center mx-3">
+                                    <span class="fs-6 ni ni-calendar me-2 lh-lg"></span>
+                                    <p class="mb-0 date text-nowrap">
+                                        <?php echo $custom_date ?>
+                                    </p>
+                                </div>
+                            <?php
+                            }
+                            ?>
                         </div>
-                        <div class="post-date d-flex align-items-center mx-3">
-                            <span class="fs-6 ni ni-calendar me-2 lh-lg"></span>
-                            <p class="mb-0 date text-nowrap">18 Dec 21</p>
-                        </div>
+
+                        <?php
+                        if ($more_details) {
+                        ?>
+                            <a href="<?php echo $more_details_link ?>" class="d-inline-flex align-items-center btn btn-finance bg-clr-yellow rounded text-white px-4 py-3 mt-4">
+                                <span class="me-2">
+                                    <?php echo $more_details ?>
+                                </span>
+                                <span class="ni ni-forward-ios"></span>
+                            </a>
+                        <?php
+                        }
+                        ?>
+
                     </div>
-                    <a href="#" class="d-inline-flex align-items-center btn btn-finance bg-clr-yellow rounded text-white px-4 py-3 mt-4">
-                        <span class="me-2">More Details</span>
-                        <span class="ni ni-forward-ios"></span>
-                    </a>
                 </div>
+
             </div>
-        </div>
-        <div class="carousel-item-card">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/slide-2.jpg" class="carousel-img d-block w-100" alt="slide-img" />
-            <div class="carousel-item-inner text-center text-white">
-                <div class="carousel-item-content">
-                    <p class="carousel-sub-title text-uppercase mb-0">Business Management</p>
-                    <h3 class="carousel-title my-3">Looking for a Best Business Plan Consultant?</h3>
-                    <div class="who-write-article d-flex align-items-center justify-content-center">
-                        <div class="user d-flex align-items-center  mx-3">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/user-1.png" alt="img" class="img-fluid user-img me-2">
-                            <p class="mb-0 user-name text-nowrap">Esther Howard</p>
-                        </div>
-                        <div class="post-date d-flex align-items-center mx-3">
-                            <span class="fs-6 ni ni-calendar me-2 lh-lg"></span>
-                            <p class="mb-0 date text-nowrap">18 Dec 21</p>
-                        </div>
-                    </div>
-                    <a href="#" class="d-inline-flex align-items-center btn btn-finance bg-clr-yellow rounded text-white px-4 py-3 mt-4">
-                        <span class="me-2">More Details</span>
-                        <span class="ni ni-forward-ios"></span>
-                    </a>
-                </div>
-            </div>
-        </div>
+        <?php
+            wp_reset_postdata();
+        }
+        ?>
     </div>
+</div>
+</div>
 </div>
 <!-- carousel -->
 
@@ -192,86 +221,46 @@
                 Velit officia consequat duis enim velit mollit.
             </p>
         </div>
+
+
+
         <div class="category-list mt-5">
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="finance-card is-radius bg-white px-3 px-sm-4 py-5 mb-4">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/pc-1.svg" alt="" class="img-fluid finance-card-img mb-4" />
-                        <a href="#" class="card-item-title text-dark mb-3">Saving & Loan</a>
-                        <p class="card-item-sub-title text-muted mb-3">
-                            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-                        </p>
-                        <a href="#" class="d-inline-flex align-items-center border btn btn-finance rounded text-dark px-4 py-3">
-                            <span class="me-2">More Details</span>
-                            <span class="ni ni-forward-ios"></span>
-                        </a>
+                <?php
+                $args = array(
+                    'order' => 'ASC',
+                    'post_type' => 'categories',
+                    'post_per_page' => 6,
+                );
+                $query = new WP_Query($args);
+                while ($query->have_posts()) {
+                    $query->the_post();
+                    $categories_image = get_field('categories_image');
+                    $categories_btn = get_field('categories_btn');
+                ?>
+                    <div class="col-lg-4">
+                        <div class="finance-card is-radius bg-white px-3 px-sm-4 py-5 mb-4">
+                            <img src="<?php echo $categories_image ?>" alt="icons" class="img-fluid finance-card-img mb-4" />
+                            <a href="#" class="card-item-title text-dark mb-3">
+                                <?php the_title(); ?>
+                            </a>
+                            <p class="card-item-sub-title text-muted mb-3">
+                                <?php the_content(); ?>
+                            </p>
+                            <a href="#" class="d-inline-flex align-items-center border btn btn-finance rounded text-dark px-4 py-3">
+                                <span class="me-2">
+                                    <?php echo $categories_btn ?>
+                                </span>
+                                <span class="ni ni-forward-ios"></span>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="finance-card is-radius bg-white px-3 px-sm-4 py-5 mb-4">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/pc-2.svg" alt="" class="img-fluid finance-card-img mb-4" />
-                        <a href="#" class="card-item-title text-dark mb-3">Mutual Funds</a>
-                        <p class="card-item-sub-title text-muted mb-3">
-                            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-                        </p>
-                        <a href="#" class="d-inline-flex align-items-center border btn btn-finance rounded text-dark px-4 py-3">
-                            <span class="me-2">More Details</span>
-                            <span class="ni ni-forward-ios"></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="finance-card is-radius bg-white px-3 px-sm-4 py-5 mb-4">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/pc-3.svg" alt="" class="img-fluid finance-card-img mb-4" />
-                        <a href="#" class="card-item-title text-dark mb-3">Wealth Management</a>
-                        <p class="card-item-sub-title text-muted mb-3">
-                            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-                        </p>
-                        <a href="#" class="d-inline-flex align-items-center border btn btn-finance rounded text-dark px-4 py-3">
-                            <span class="me-2">More Details</span>
-                            <span class="ni ni-forward-ios"></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="finance-card is-radius bg-white px-3 px-sm-4 py-5 mb-4">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/pc-4.svg" alt="" class="img-fluid finance-card-img mb-4" />
-                        <a href="#" class="card-item-title text-dark mb-3">Banking</a>
-                        <p class="card-item-sub-title text-muted mb-3">
-                            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-                        </p>
-                        <a href="#" class="d-inline-flex align-items-center border btn btn-finance rounded text-dark px-4 py-3">
-                            <span class="me-2">More Details</span>
-                            <span class="ni ni-forward-ios"></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="finance-card is-radius bg-white px-3 px-sm-4 py-5 mb-4">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/pc-5.svg" alt="" class="img-fluid finance-card-img mb-4" />
-                        <a href="#" class="card-item-title text-dark mb-3">Accountancy</a>
-                        <p class="card-item-sub-title text-muted mb-3">
-                            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-                        </p>
-                        <a href="#" class="d-inline-flex align-items-center border btn btn-finance rounded text-dark px-4 py-3">
-                            <span class="me-2">More Details</span>
-                            <span class="ni ni-forward-ios"></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="finance-card is-radius bg-white px-3 px-sm-4 py-5 mb-4">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/pc-6.svg" alt="" class="img-fluid finance-card-img mb-4" />
-                        <a href="#" class="card-item-title text-dark mb-3">Insurance</a>
-                        <p class="card-item-sub-title text-muted mb-3">
-                            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-                        </p>
-                        <a href="#" class="d-inline-flex align-items-center border btn btn-finance rounded text-dark px-4 py-3">
-                            <span class="me-2">More Details</span>
-                            <span class="ni ni-forward-ios"></span>
-                        </a>
-                    </div>
-                </div>
+
+                <?php
+                    wp_reset_postdata();
+                }
+
+                ?>
             </div>
         </div>
     </div>
